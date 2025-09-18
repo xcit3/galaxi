@@ -1,0 +1,23 @@
+https://stackoverflow.com/questions/32054891/python-input-sanitization
+https://mateam.net/html-escape-characters/
+https://stackoverflow.com/questions/20503183/python-flask-working-with-wraps 
+https://www.w3schools.com/tags/tag_datalist.asp 
+https://www.w3schools.com/python/ref_list_sort.asp
+https://webmasters.stackexchange.com/questions/131460/how-do-you-prevent-html-special-character-coding-from-displaying-on-a-website 
+https://stackoverflow.com/questions/57169670/stop-jinja-from-converting-string-to-url-encoding
+https://webmasters.stackexchange.com/questions/131460/how-do-you-prevent-html-special-character-coding-from-displaying-on-a-website
+https://stackoverflow.com/questions/6833914/how-to-prevent-the-confirm-form-resubmission-dialog
+https://medium.com/@brodiea19/flask-sqlalchemy-how-to-upload-photos-and-render-them-to-your-webpage-84aa549ab39e
+^^^^^ file upload managing for flask (uses oop and some libraries)
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+https://www.w3schools.com/jsref/event_onclick.asp
+https://stackoverflow.com/questions/7562095/redirect-on-select-option-in-select-box
+https://stackoverflow.com/questions/5303899/change-onclick-action-with-a-javascript-function 
+https://developer.mozilla.org/en-US/docs/Web/API/Element/children 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections
+https://www.w3schools.com/js/js_if_else.asp
+https://hostman.com/tutorials/how-to-create-scrolling-on-your-website-using-css/
+https://testdriven.io/courses/learn-flask/sessions/#:~:text=Sessions%20in%20Flask,-In%20Flask%2C%20you&text=How%20are%20sessions%20implemented%20in,server%2Dside%20where%20it's%20decoded.
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Sending_and_retrieving_form_data
+https://www.w3schools.com/sql/sql_count.asp
+https://stackoverflow.com/questions/2876789/how-can-i-search-case-insensitive-in-a-column-using-like-wildcard 

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ post[1] | safe }}'s post
+{% endblock %}
+{% block main %}
+<div class='posts'>
+<article id="{{ post[0] | safe }}" class="post main_post">
+    <a class='profile_link' href="/profile/{{ post[1] | safe}}">{{ post[1] | safe}}</a>
+    <p>{{ post[2] | safe }}</p>
+   <div class='post_info'> <div id='likes_{{ post[0] }}' onclick='change("likes", "{{ post[0] }}", "posts")'><span class="fa-solid fa-thumbs-up{% if post[5] and user_id in post[5] %} interacted{% endif %}"></span><p> {{ post[6] }} </p></div> <div id='dislikes_{{ post[0] }}' onclick='change("dislikes", "{{ post[0] }}", "posts")'><span class="fa-solid fa-thumbs-down{% if post[3] and user_id in post[3] %} interacted{% endif %}"></span><p> {{ post[7] }} </p></div><div id='comments_{{ post[0] }}'><span class="fa-solid fa-comments"></span> <p id='comments'> {{ post[8] }} </p></div></div>
+</article>
+</div>
+{% for comment in comments %}
+<div class='comment_buffer'>
+<article id="{{comment[0] | safe}}" class="comment">
+    <a class='profile_link' href="/profile/{{ comment[2] | safe}}">{{ comment[2] | safe}}</a>
+    <p>{{ comment[3] | safe }}</p>
+   <div class='comment_info'> <div id='likes_{{ comment[0] }}' onclick='change("likes", "{{ comment[0] }}", "comments")'><span class="fa-solid fa-thumbs-up{% if comment[4] and user_id in comment[4] %} interacted{% endif %}"></span><p> {{ comment[7] }} </p></div> <div id='dislikes_{{ comment[0] }}' onclick='change("dislikes", "{{ comment[0] }}", "comments")'><span class="fa-solid fa-thumbs-down{% if comment[5] and user_id in comment[5] %} interacted{% endif %}"></span><p> {{ comment[8] }} </p></div></div>
+</article>
+</div>
+{% endfor %}
+<form id="comment_form" action="/comment" method="POST" class='center'>
+    <div>
+        <textarea autocomplete="off" autofocus class="form-control" id="comment_input" name="content" placeholder="What would you like to say?"></textarea>
+    </div>
+    <input type="hidden" name="post_id" value="{{ post[0] }}"></input>
+    <button class="btn-primary" type="submit">Comment</button>
+</form>
+<script>
+    function change(action, thing_id, table) {
+    const post = document.getElementById(action+"_"+thing_id);
+    const children = post.childNodes;
+    console.log(children)
+    const icon = children[0];
+    const count = children[1];
+    let sign = 0;
+    let value = 0;
+    icon.classList.toggle("interacted");
+    
+    if ("interacted" == icon.classList[(icon.classList["length"]-1)]){
+        sign = 1;
+    } else {
+        sign = -1;
+    };
+    value = String(Number(count.textContent) + sign);
+    count.textContent = " " + value + " ";
+    const formData = new FormData();
+    formData.append('action', action);
+    formData.append('thing_id', thing_id);
+    formData.append('sign', sign);
+    formData.append('value', value);
+    formData.append('table', table);
+    fetch('/interactions', {
+        method: 'POST',
+        body: formData,
+    });
+    //two reloads to make sure it actually works
+    
+};
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Chats
+{% endblock %}
+
+{% block main %}
+<article class="greeting">
+    <h1>Chats</h1>
+</article>
+
+{% for chat in chat_list %}
+<div class="chat center">
+    <a href="chat/{{chat.get_chat_id()}}">{{ chat.get_name() |safe }}</a>
+    <p>Members: {{ ", ".join(chat.get_members()) | safe}}</p>
+</div>
+{% endfor %}
+<hr></hr>
+<form action="/chats" method="post" class='center'>
+    <h3> Start a Chat </h3>
+    <div>
+        <input list="followers" autocomplete="off" class="form-control" id="chat_with" name="chat_with" placeholder="Username..." type="text">
+        <datalist id="followers">
+            {% for follower in follower_list %}
+            <option value="{{ follower |safe }}"></option>
+            {% endfor %}
+    </div>  
+    <button class="btn-primary" type="submit">Make Chat</button>
+    <p>{{ error }}</p>
+</form>
+{% endblock %}

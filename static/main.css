@@ -1,0 +1,271 @@
+body{
+    margin: 0;
+    padding: 0;
+    height:100%;
+    background-color: #f9e6fa;
+}
+a{
+    font-weight:bold;
+    color:#000000;
+}
+p{
+    word-wrap:break-word;
+}
+.posts{
+    overflow-x: hidden;
+    float: center;
+    text-align: center;
+}
+.post{
+    border: solid;
+    border-radius: 7.5px;
+    border-width: 2px;
+    border-color: #813c85;
+    margin: 10px;
+    display: inline-block;
+    min-width:17.5vw;
+    max-width:80vw;
+    text-align:center;
+    background-color: #efc0ef;
+}
+.main_post{
+    width:75vw;
+    overflow: hidden;
+}
+.post {
+    padding:10px;
+    margin:20px;
+}
+.post p, a{
+    text-decoration:none;
+}
+.post_info{
+    text-align:center;
+}
+.post_info p, span{
+    text-align: center;
+    display: inline;
+    white-space: pre-line;
+}
+.post_info div{
+    display:inline;
+    text-align: center;
+}
+.comment{
+    border: solid;
+    border-radius: 7.5px;
+    border-width: 2px;
+    border-color: #813c85;
+    margin: 10px;
+    display: inline-block;
+    min-width:17.5vw;
+    background-color: #f8dcfa;
+    max-width:100%;
+}
+.comment {
+    padding:10px;
+    margin:20px;
+}
+.comment p{
+    word-wrap:break-word;
+}
+.comment_buffer{
+    display:block;
+    width:80vw;
+}
+.comment_info p, span{
+    display: inline;
+    max-width:100%;
+    word-wrap:break-word;
+}
+.comment_info div{
+    display:inline;
+    max-width:100%;
+}
+nav{
+    width:100vw;
+    height:8vh;
+    position:fixed;
+}
+#nav_divider{
+    padding-bottom:8vh;
+}
+nav ul li{
+    float: left;
+    font-size: 2.8vh;
+    width:1.6866%;
+    height:30.9375%;
+    margin: 0 max(2.125vw, 12.5px);
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin:0;
+  background-color: #270360;
+  width:100%;
+  height:100%;
+}
+nav ul li select{
+    font-family: "Font Awesome", "Times New Roman";
+    margin-right:2vh;
+}
+nav li a, nav li h1{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 2.6vh 2.15vw;
+    color:white;
+    transition-duration:0.4s;
+}
+nav li a:hover{
+    background-color: #5D3C82;
+}
+.profile_option{
+    float:right;
+    padding:2.25vh 5vw;
+    margin-left:0;
+    margin-top:-2.5vh;
+    transition-duration:0.2s;
+}
+#nav_prof_options{
+    margin-left:min(-5vw, -70px);
+    
+}
+h1{
+    display:block;
+}
+.title{
+    height:100%;
+    margin:0;
+    padding:1.75vh;
+}
+#title_item{
+    margin-left:39vw;
+    margin-right:39vw;
+    margin-top:-2.6vh;
+    width:20vw;
+    display:inline-flexbox;
+    text-align:center;
+}
+#leftmost_nav{
+    margin-left:0;
+    margin-right:max(2.3vw, 12.5px);
+}
+#make_post_nav{
+    margin-right:max(1.9vw, 12.5px);
+}
+#blocked_message{
+    
+    
+}
+#user_sent{
+    text-align:right;
+}
+.interacted{
+    color: #f754c0;
+}
+#message_count{
+    display:none;
+}
+.flashes{
+    list-style-type: none;
+}
+.greeting{
+    text-align:center;
+}
+.message_buffer{
+    display:block;
+    text-align:right;
+    margin: 10px;
+}
+.user_sent{
+    text-align:left;
+}
+.message_container{
+    display:inline-block;
+    max-width:40vw;
+    min-width:30vw;
+    border: solid;
+    border-radius: 7.5px;
+    border-width: 2px;
+    background-color: #f8dcfa;
+    border-color: #813c85;
+}
+.message_container:has(.blocked_message), .message_container:has(.unblocked_message){
+    background-color:lightgrey;
+}
+.message_container {
+    padding:8px;
+    margin:8px;
+}
+.message{
+    text-align: inherit;
+}
+button{
+    color:black;
+    background-color:#efc0ef;
+    border-width:2px;
+    border-color:#815f83;
+    border-radius: 2px;
+    padding:5px;
+    margin:10px;
+}
+#leave_button{
+    display:inline;
+}
+.center{
+    text-align:center;
+    padding:10px;
+}
+.searchbar{
+    width:40vw;
+    padding:5px;
+    margin:10px;
+}
+.account{
+    display:inline-block;
+    border:solid;
+    border-color:#813c85;
+    border-width:2px;
+    min-width:50vw;
+    max-width:60vw;
+    border-radius: 5px;
+    background-color: #f8dcfa;
+}
+hr{
+    background-color:#813c85;
+    color:#813c85;
+    height:1px;
+}
+#chat_name{
+    display:inline-block;
+}
+.right{
+    text-align:right;
+}
+#members{
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+}
+textarea{
+    width:40vw;
+    height:20vh;
+}
+@media only screen and (max-width:430px) {
+    #title_item{
+        margin-left:36vw;
+        margin-right:36vw;
+    }
+    .account{
+        min-width:70vw;
+        max-width:80vw;
+    }
+    .searchbar{
+        width:70vw;
+    }
+    textarea{
+        width:70vw;
+        height:20vh;
+    }
+}

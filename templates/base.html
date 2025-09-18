@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <script src="https://kit.fontawesome.com/3beaa40157.js" crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/static/main.css" rel="stylesheet">
+
+        <title>{% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+
+        <nav>
+            <ul>
+                <li id='leftmost_nav'><a href="/" class="fa-solid fa-house"></a></li>
+                <li ><a  href="/explore" class="fa-solid fa-compass"></a></li>
+                <li id='make_post_nav'><a  href="/make_post" class="fa-solid fa-plus"></a></li>
+                <li ><a href="/chats" class="fa-solid fa-comment"></a></li>
+                <li id="title_item"> <h1 class="title">Galaxi</h1></li>
+                <li class='profile_option'>
+                    <select id='nav_prof_options' onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                        <!-- Got this from stack overflow, goated tbh -->
+                        <option>Profile Options</option>
+                        <option value='/sign_up'>
+                            Sign Up
+                        </option>
+                        <option value='/login'>
+                            Login
+                        </option>
+                        <option value='/logout'>
+                            Logout
+                        </option>
+                    </select>
+                </li>
+                
+            </ul>
+        </nav>
+        <div id="nav_divider"></div>
+        <main>
+            {% block header %}{% endblock %}
+            {% block main %}{% endblock %}
+        </main>
+
+    </body>
+</html>
+

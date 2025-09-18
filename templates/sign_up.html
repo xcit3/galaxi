@@ -1,0 +1,20 @@
+{% extends "login.html" %}
+{% block title %}
+    Sign Up
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block form %}
+    <form action="/sign_up" method="post" class='center'>
+{% endblock %}
+{% block optional %}
+        <div>
+            <input autocomplete="off" autofocus class="form-control" id="email" name="email" placeholder="Email" type="text">
+        </div>
+{% endblock %}
+{% block link %}
+<p>Already have an account? Login <a href='/login'>here</a></p>
+{% endblock %}
+{% block button_text %}Register{% endblock %}
+
+

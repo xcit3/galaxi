@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Make Post
+{% endblock %}
+{% block main %}
+<form action="/make_post" method="post" class='center'>
+        <div>
+            <textarea autocomplete="off" autofocus class="form-control" id="t_content" name="t_content" placeholder="What do you want to say?"></textarea>
+        </div>
+        <button class="btn-primary" type="submit">Make Post</button>
+    </form>
+{% endblock %}

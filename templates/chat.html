@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ chat_name |safe }}
+{% endblock %}
+{% block main %}
+<div class='center chat_name'>
+<h1 class='greeting' id='chat_name'> {{ chat_name |safe }} </h1>
+</div>
+<div class='right'>
+<button id='leave_button' onclick="leave_chat()">Leave Chat</button>
+</div>
+<form action='/change_name' method='get' id='name_change_form' class='center'>
+<div>
+    <input name="name" type='text' id='name_change' placeholder='Chat name...'></input>
+</div>
+    <input type='hidden' value='{{ chat_id }}' name='chat_id'></input>
+<button class="btn-primary" type="submit">Change Chat Name</button>
+</form>
+<hr></hr>
+<div class='center'>
+<h2>Members: </h2>
+<ul id='members'>
+{% for member in members %}
+ <li> {{ member | safe}} </li>
+{% endfor %}
+</ul>
+<form action="/add_member" method="get">
+    <h3> Add a person to the chat </h3>
+    <div>
+        <input select='focus' list="followers" autocomplete="off" class="form-control" id="new_username" name="new_username" placeholder="User to add to chat..." type="text">
+        <datalist id="followers">
+            {% for follower in follower_list %}
+            <option value="{{ follower |safe }}"></option>
+            {% endfor %}
+    </div>  
+    <input type='hidden' value='{{ chat_id }}' name='chat_id'></input>
+    <button class="btn-primary" type="submit">Add Member</button>
+</form>
+{% with errors = get_flashed_messages() %}
+        {% if errors %}
+            <ul class=flashes>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+<hr></hr>
+{% for message in message_list %}
+<div class='message_buffer{%if message.get_sender() == session['account'] %} user_sent{% endif %}'>
+<article class='message_container' {% if message.get_sender() in blocked_list %} onclick="swap_message('{{ message.get_message_id() | safe }}', '{{ message.get_content() | safe }}');"{% endif %}>
+<a href="/profile/{{ message.get_sender() |safe }}">{{ message.get_sender() |safe }}</a>
+<div id = "{{ message.get_message_id() }}" class="message"><p><span id='display_text{{message.get_message_id()}}' {% if message.get_sender() in blocked_list %}class="blocked_message"> 'Message Blocked (Click to view)'{% else %}>{{ message.get_content() |safe }}{% endif %}</span></p></div>
+</article>
+</div>
+{% endfor %}
+<input type='hidden' id='last_sender' value='{{ last_message.get_sender()}}'></input>
+    <form id="message_form" action="/chat/{{ chat_id }}" onsubmit="refresh()" method="get" class='center'>
+        <div class="type_box">
+            <input class='searchbar' autocomplete="off" class="form-control" id="content" name="content" placeholder="Message..." type="text">
+        </div>
+        <button id = "message_button" class="btn-primary"  type="submit">Send Message</button>
+    </form>
+    <input id='message_count' value='{{ message_count }}'>
+    <script>
+        function refresh(){
+            const form = document.getElementById("message_button")
+            form.action = ""
+            location.reload();
+            location.reload();
+        };
+
+        function swap_message(message_id, content){
+            const display_text = document.getElementById("display_text"+message_id);
+            const c_list = display_text.classList;
+            c_list.toggle("blocked_message");
+            c_list.toggle("unblocked_message");
+            if ("blocked_message" == c_list[(c_list["length"]-1)]){
+                display_text.textContent = 'Message Blocked (Click to view)';            
+            } else{
+                display_text.textContent = content;
+            };
+        };
+        function message_check(){
+        const msg_count = document.getElementById('message_count').value;
+        const formData = new FormData();
+        formData.append('chat_id', {{ chat_id }});
+        formData.append('msg_count', msg_count);
+        let response = fetch('/new_msg_check', {
+        method: 'POST',
+        body: formData,
+    });
+        return response
+        
+        };
+
+        function leave_chat(){
+        const formData = new FormData();
+        formData.append('chat_id', {{ chat_id }});
+        fetch('/leave_chat', {
+        method: "GET",
+        body: formData,
+        });
+        window.location.href='/chats';
+        };
+        //Stack overflow code for delays, referenced here https://stackoverflow.com/questions/17883692/how-to-set-time-delay-in-javascript
+//ended up heavily modifying since promises are stupid and dumb and make no sense
+        window.scrollTo({
+        top: document.body.scrollHeight,
+    });
+
+
+        document.getElementById('content').addEventListener('input', function(){
+        localStorage.setItem('saved_message', this.value)
+        });
+
+        window.addEventListener('load', function(){
+        const last_sender = document.getElementById('last_sender');
+        const message_box = document.getElementById('content');
+        const message_value = localStorage.getItem('saved_message');
+        console.log(last_sender.value);
+        console.log('{{ session["account"] | safe }}')
+        if (last_sender.value == '{{ session["account"] | safe }}'){
+            localStorage.setItem('saved_message', "");
+        };
+        if (message_value && last_sender.value != '{{ session["account"] | safe }}') {
+            message_box.value = message_value;
+        };
+        });
+
+        const delay = (delayInms) => {
+        return new Promise(resolve => setTimeout(resolve, delayInms));
+        };
+        const update_chat = async () => {
+        const active = 1;
+        while (active==1){
+        message_check().then(function(v){
+            v.json().then(function(x){
+            console.log(x.answer)
+            if (x.answer=='refresh'){
+            refresh();
+            }
+            })
+        });
+        let delayres = await delay(1000);
+        };
+        };
+        
+        update_chat();
+
+
+    
+    </script>
+{% endblock %}
