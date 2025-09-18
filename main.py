@@ -420,11 +420,10 @@ def login():
             result = connection.execute(query).fetchone()
             if result:
                 account = get_account(username)
-            if check_password(password, account.get_salt(), account.get_password()):
-                session["account"] = account.get_username()
-                return redirect('/')
-            else:
-                return render_template("login.html", error="Incorrect username or password.")
+                if check_password(password, account.get_salt(), account.get_password()):
+                    session["account"] = account.get_username()
+                    return redirect('/')
+            return render_template("login.html", error="Incorrect username or password.")
         else:
             return render_template("login.html", error="Please fill in all fields.")      
 
